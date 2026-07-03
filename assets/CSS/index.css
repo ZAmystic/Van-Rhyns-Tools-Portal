@@ -1,0 +1,154 @@
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg:        #0e0f11;
+      --surface:   #16181c;
+      --border:    #2a2d34;
+      --border-hover: #4a4f5c;
+      --text:      #e8eaed;
+      --muted:     #7a7f8c;
+      --accent-a:  #3d8ef0;
+      --accent-b:  #34c48a;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      flex-direction: column;
+      padding: 2rem;
+    }
+
+    header {
+      text-align: left;
+      margin-bottom: 3.5rem;
+    }
+
+    header h1 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .divider {
+      width: 300px;
+      height: 1px;
+      background: var(--border);
+      margin: 1rem 0 0;
+    }
+
+    .cards {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .card {
+      display: block;
+      text-decoration: none;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2.2rem 2.4rem;
+      width: 240px;
+      transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .card--csv::before  { background: var(--accent-a); }
+    .card--loc::before  { background: var(--accent-b); }
+
+    .card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      margin-bottom: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card--csv .card-icon { background: rgba(61, 142, 240, 0.12); }
+    .card--loc .card-icon { background: rgba(52, 196, 138, 0.12); }
+
+    .card-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .card--csv .card-icon svg { stroke: var(--accent-a); }
+    .card--loc .card-icon svg { stroke: var(--accent-b); }
+
+    .card h2 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.45rem;
+      letter-spacing: 0.01em;
+    }
+
+    .card p {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.55;
+      font-weight: 300;
+    }
+
+    .card-arrow {
+      margin-top: 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: gap 0.2s ease;
+    }
+
+    .card--csv .card-arrow { color: var(--accent-a); }
+    .card--loc .card-arrow { color: var(--accent-b); }
+
+    .card:hover .card-arrow { gap: 0.65rem; }
+
+    .card-arrow svg {
+      width: 13px;
+      height: 13px;
+      stroke-width: 2.2;
+    }
+
+    .card--csv .card-arrow svg { stroke: var(--accent-a); }
+    .card--loc .card-arrow svg { stroke: var(--accent-b); }
+
+    @media (max-width: 540px) {
+      .card { width: 100%; max-width: 320px; }
+    }
