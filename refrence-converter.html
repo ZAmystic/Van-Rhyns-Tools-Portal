@@ -6,8 +6,15 @@
   <link rel="stylesheet" href="assets/CSS/refrenceConverter.css">
 </head>
 <body>
-  <a href="index.html" class="back-link">← Back to Home</a>
-  <img id="logo" src="https://vrattorneys.co.za/wp-content/uploads/2022/06/VR-logo-in-white.png" alt="Logo" class="logo">
+  <header class="converter-header">
+    <a href="index.html" class="back-link">
+      <svg viewBox="0 0 20 20" aria-hidden="true">
+        <path d="M12.5 4.5 7 10l5.5 5.5M7.5 10H17"/>
+      </svg>
+      <span>Back to Home</span>
+    </a>
+    <img id="logo" src="https://vrattorneys.co.za/wp-content/uploads/2022/06/VR-logo-in-white.png" alt="Logo" class="logo">
+  </header>
   <div class="upload-wrapper">
     <h1>Import CSV Data</h1>
     <p class="subtitle">
@@ -17,7 +24,9 @@
 
     <div class="upload-box" id="dropZone">
       <p id="fileName" class="file-name"></p>
-      <div class="icon">☁️</div>
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M19.35 10.04A7.49 7.49 0 0 0 5.2 8.09 6 6 0 0 0 6 20h13a5 5 0 0 0 .35-9.96ZM13 16v-3h3l-4-4-4 4h3v3h2Z"/>
+      </svg>
       <p class="upload-text">Ready to upload?<br>Select a file from your computer or drag and drop your CSV here.</p>
       <div class="buttons">
         <label class="btn">
