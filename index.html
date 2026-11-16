@@ -4,114 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#801b18">
-    <title>Van Rhyns Attorneys Portal - Login</title>
-    <link rel="icon" type="image/png" href="./assets/Images/Van%20Rhyns%20Attorneys%20Logo%20Mini.png" />
-    <link rel="stylesheet" href="assets/CSS/index.css">
+    <title>Login | Van Rhyns Attorneys</title>
+    <link rel="icon" type="image/png" href="assets/Images/Van%20Rhyns%20Attorneys%20Logo%20Mini.png">
+    <link rel="stylesheet" href="assets/CSS/login.css">
+    <link rel="stylesheet" href="assets/CSS/login-errors.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="assets/JavaScript/config.js"></script>
+    <script defer src="assets/JavaScript/database.js"></script>
+    <script defer src="assets/JavaScript/login.js"></script>
 </head>
 <body>
     <main class="login-main">
-        <!-- Decorative Background -->
-        <svg class="background-icons" aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg">
-
-            <defs>
-                <pattern id="legal-pattern"
-                        width="700"
-                        height="500"
-                        patternUnits="userSpaceOnUse">
-
-                    <g fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round">
-
-                        <!-- Scales of Justice -->
-                        <g transform="translate(65 60) rotate(-15)">
-                            <path d="M0 -20V20
-                                    M-15 20H15
-                                    M-22 -12H22
-                                    M-17 -12L-27 9H-7Z
-                                    M17 -12L7 9H27Z"/>
-                        </g>
-
-                        <!-- Legal Document -->
-                        <g transform="translate(280 95) rotate(15)">
-                            <path d="M-17 -24H7L18 -13V24H-17Z
-                                    M7 -24V-13H18
-                                    M-9 -3H10
-                                    M-9 5H10
-                                    M-9 13H4"/>
-                        </g>
-
-                        <!-- Briefcase -->
-                        <g transform="translate(550 55) rotate(12)">
-                            <rect x="-25" y="-12"
-                                width="50" height="34" rx="4"/>
-                            <path d="M-10 -12V-21H10V-12
-                                    M-25 1H-4
-                                    M4 1H25"/>
-                            <rect x="-4" y="-2"
-                                width="8" height="7" rx="1"/>
-                        </g>
-
-                        <!-- Security Shield -->
-                        <g transform="translate(125 270) rotate(-12)">
-                            <path d="M0 -25L20 -17V0
-                                    Q20 16 0 26
-                                    Q-20 16 -20 0V-17Z
-                                    M-8 0L-2 7L10 -6"/>
-                        </g>
-
-                        <!-- Gavel -->
-                        <g transform="translate(435 235) rotate(35)">
-                            <rect x="-16" y="-22"
-                                width="32" height="20" rx="2"/>
-                            <path d="M-10 -22V-2
-                                    M10 -22V-2
-                                    M-3 -2V25H4V-2Z
-                                    M-20 32H20"/>
-                        </g>
-
-                        <!-- Padlock -->
-                        <g transform="translate(635 335) rotate(-15)">
-                            <rect x="-18" y="-5"
-                                width="36" height="28" rx="4"/>
-                            <path d="M-11 -5V-15
-                                    A11 11 0 0 1 11 -15V-5
-                                    M0 8V14"/>
-                            <circle cx="0" cy="5" r="3"/>
-                        </g>
-
-                        <!-- Additional Document -->
-                        <g transform="translate(255 430)
-                                    rotate(-15) scale(0.8)">
-                            <path d="M-17 -24H7L18 -13V24H-17Z
-                                    M7 -24V-13H18
-                                    M-9 -3H10
-                                    M-9 5H10
-                                    M-9 13H4"/>
-                        </g>
-
-                        <!-- Additional Scales -->
-                        <g transform="translate(490 440)
-                                    rotate(10) scale(0.9)">
-                            <path d="M0 -20V20
-                                    M-15 20H15
-                                    M-22 -12H22
-                                    M-17 -12L-27 9H-7Z
-                                    M17 -12L7 9H27Z"/>
-                        </g>
-
-                    </g>
-                </pattern>
-            </defs>
-
-            <rect width="100%"
-                height="100%"
-                fill="url(#legal-pattern)"/>
-            </svg>
-
         <section class="login-card" aria-labelledby="login-title">
             <div class="login-brand">
                 <img src="assets/Images/Van%20Rhyns%20Attorneys%20Logo%20Mini.png" alt="" class="brand-mark">
@@ -121,13 +24,8 @@
                 <h1 id="login-title">Welcome back</h1>
                 <p>Sign in to access the internal tools portal.</p>
             </div>
-            <div id="loginError"
-                class="login-error"
-                role="alert"
-                hidden>
-            </div>
 
-            <form class="login-form" action="loginForm" method="post">
+            <form class="login-form" id="loginForm" method="post">
                 <div class="field">
                     <label for="email">Email address</label>
                     <div class="input-wrap">
@@ -142,11 +40,13 @@
                         <input type="password" id="password" name="password" placeholder="Enter your password" autocomplete="current-password" required>
                     </div>
                 </div>
+                <div id="loginError" class="login-error" role="alert" hidden></div>
                 <button class="login-button" type="submit" disabled>
                     <span>Log in</span>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
                 </button>
             </form>
+            <noscript>Please enable JavaScript to log in.</noscript>
             <div class="staff-notice">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-3 7-10V5l-7-3-7 3v7c0 7 7 10 7 10Z"/><path d="m9 12 2 2 4-4"/></svg>
                 <div><strong>Authorised personnel only</strong><p>For access assistance, contact your administrator.</p></div>
@@ -154,16 +54,5 @@
         </section>
     </main>
 
-    <!-- Supabase Library -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <!-- Environment Configuration -->
-    <script src="assets/JavaScript/config.js"></script>
-
-    <!-- Supabase Connection -->
-    <script src="assets/JavaScript/database.js"></script>
-
-    <!-- Login Controller -->
-    <script src="assets/JavaScript/login.js"></script>
 </body>
 </html>

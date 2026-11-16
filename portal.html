@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-protected>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,26 +10,86 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/png" href="./assets/Images/Van%20Rhyns%20Attorneys%20Logo%20Mini.png" />
   <link rel="stylesheet" href="./assets/CSS/portal.css" />
+  <link rel="stylesheet" href="./assets/CSS/auth.css" />
+  <style>html[data-protected]:not([data-authorized]) body > :not(#authStatus):not(noscript) { display:none !important; } html[data-authorized] #authStatus { display:none !important; }</style>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="assets/JavaScript/config.js"></script>
+  <script defer src="assets/JavaScript/database.js"></script>
+
+  <script defer src="assets/JavaScript/auth.js"></script>
+  <script defer src="assets/JavaScript/metrofile.js"></script>
 </head>
 <body>
+  <section id="authStatus" role="status" aria-live="polite" data-state="loading">
+    <img class="auth-logo" src="assets/Images/Van%20Rhyns%20Attorneys%20Logo%20Mini.png" alt="Van Rhyns Attorneys">
+    <p class="auth-eyebrow">Van Rhyns Attorneys · Internal tools</p>
+    <div class="auth-symbol" aria-hidden="true"></div>
+    <h1 class="auth-title">Verifying your session</h1>
+    <p class="auth-description">Checking access to the internal tools portal.</p>
+    <div class="auth-actions">
+      <button class="auth-primary" type="button" onclick="location.reload()">Reload portal</button>
+      <a class="auth-secondary" href="./index.html?reason=unavailable">Return to login</a>
+    </div>
+    <p class="auth-help">Authorised personnel only</p>
+  </section>
+  <noscript>Please enable JavaScript to access the internal tools portal.</noscript>
   <div class="page-shell">
     <header class="site-header">
       <span class="header-label">Internal tools</span>
-
-      <!-- CSS wordmark; replace this with your actual logo image if available. -->
-      <img id="logo" src="https://vrattorneys.co.za/wp-content/uploads/2022/06/VR-logo-in-white.png" alt="Logo" class="logo">
-
-      <span class="header-spacer" aria-hidden="true"></span>
+      <img id="logo" src="assets/Images/Van%20Rhyns%20Attorneys%20Logo.png" alt="Van Rhyns Attorneys" class="logo">
+      <div class="header-account">
+        <div class="account-details">
+          <span class="account-label">Signed in as</span>
+          <span id="userName" class="account-name"></span>
+        </div>
+        <button id="logoutButton" class="logout-button" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 17l5-5-5-5M15 12H3M12 3h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7"/></svg>
+          Sign out
+        </button>
+      </div>
     </header>
-
-    <main class="portal-panel" id="main-content">
+    <main class="portal-main" id="main-content">
+        <a href="file-organizer.html" class="portal-panel metrofile-panel card--metrofile" aria-labelledby="metrofile-title">
+          <span class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="5" rx="1"/>
+              <path d="M5 8v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8M10 12h4"/>
+            </svg>
+          </span>
+          <span class="card-content">
+            <span class="card-title" id="metrofile-title">MetroFile Storage</span>
+            <span class="card-description">Track and organise files stored at Van Rhyns and MetroFile.</span>
+          </span>
+          <span class="storage-overview" aria-label="File storage distribution">
+            <span class="storage-legend">
+              <span class="storage-item">
+                <span class="storage-label"><span class="storage-dot storage-dot--office"></span>Files at Van Rhyns</span>
+                <strong id="officePercentage">—</strong>
+                <span class="storage-count" id="officeCount">— files</span>
+              </span>
+              <span class="storage-item storage-item--remote">
+                <span class="storage-label"><span class="storage-dot storage-dot--remote"></span>Files at MetroFile</span>
+                <strong id="remotePercentage">—</strong>
+                <span class="storage-count" id="remoteCount">— files</span>
+              </span>
+            </span>
+            <span class="storage-bar" aria-hidden="true">
+              <span id="officeSegment" class="storage-segment storage-segment--office"></span>
+              <span id="remoteSegment" class="storage-segment storage-segment--remote"></span>
+            </span>
+            <span class="storage-summary" id="storageSummary">Storage data not connected</span>
+          </span>
+          <span class="card-action">Open File Organizer
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+          </span>
+        </a>
+      <section class="portal-panel" aria-labelledby="tools-title">
       <div class="portal-intro">
-        <h1>Tools Portal</h1>
+        <h1 id="tools-title">Tools Portal</h1>
         <p>Access the tools you need to process information and manage your daily work efficiently.</p>
       </div>
-
       <div class="cards" aria-label="Available tools">
-        <a href="refrence-converter.html" class="card card--csv">
+        <a href="tools/csv_to_excel/csv_to_excel.html" class="card card--csv">
           <span class="card-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -39,30 +99,31 @@
               <line x1="8" y1="9" x2="10" y2="9" />
             </svg>
           </span>
-
           <span class="card-content">
             <span class="card-title">CSV to Excel</span>
             <span class="card-description">Convert CSV files into formatted Excel spreadsheets quickly and accurately.</span>
           </span>
-
-          <span class="card-action">
-            Open tool
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
-            </svg>
+          <span class="card-action">Open tool
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
           </span>
         </a>
-        
-      </div>
-    </main>
 
-    <footer class="site-footer">
-      <p>Van Rhyns Attorneys &copy; <span id="current-year">2026</span>. All rights reserved.</p>
-    </footer>
+      </div>
+      </section>
+    </main>
+    <footer class="site-footer"><p>Van Rhyns Attorneys &copy; <span id="current-year">2026</span>. All rights reserved.</p></footer>
   </div>
   <script>
     document.getElementById('current-year').textContent = new Date().getFullYear();
+    setTimeout(() => {
+      const status = document.getElementById('authStatus');
+      if (document.documentElement.hasAttribute('data-authorized') || window.logout || !status) return;
+      status.dataset.state = 'error';
+      status.querySelector('.auth-symbol').textContent = '!';
+      status.querySelector('.auth-title').textContent = 'Unable to open the portal';
+      status.querySelector('.auth-description').textContent = 'The authentication scripts did not load. Reload the page or contact your administrator.';
+      status.querySelector('.auth-help').textContent = 'Reference: AUTH-LOAD';
+    }, 12000);
   </script>
 </body>
 </html>

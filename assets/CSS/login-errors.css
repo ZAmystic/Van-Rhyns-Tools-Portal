@@ -1,0 +1,14 @@
+/* Login status styling, independent of the existing layout. */
+.login-error {
+    padding: 12px 14px;
+    border: 1px solid #e9c6c3;
+    border-left: 3px solid #811d19;
+    border-radius: 8px;
+    background: #fdf2f1;
+    color: #811d19;
+    font-size: 13px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+.login-error[hidden] { display: none !important; }
+.login-button:disabled { opacity: .65; cursor: not-allowed; box-shadow: none; }

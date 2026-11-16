@@ -1,198 +1,107 @@
-const loginForm = document.querySelector(".login-form");
-const loginError = document.getElementById("loginError");
-
-if (!loginForm) {
-    throw new Error("Login form not found.");
-}
-
-const loginButton = loginForm.querySelector(".login-button");
-
-if (!loginButton) {
-    throw new Error("Login button not found.");
-}
-
-const buttonText = loginButton.querySelector("span");
-
-// ========================================
-// ERROR HANDLING
-// ========================================
-
-function showError(message) {
-    loginError.textContent = message;
-    loginError.hidden = false;
-}
-
-function clearError() {
-    loginError.textContent = "";
-    loginError.hidden = true;
-}
-
-
-// ========================================
-// LOADING STATE
-// ========================================
-
-function setLoading(isLoading) {
-    loginButton.disabled = isLoading;
-
-    buttonText.textContent = isLoading
-        ? "Signing in..."
-        : "Sign in";
-}
-
-
-// ========================================
-// VALIDATE EMPLOYEE PROFILE
-// ========================================
-
-async function validateProfile(userId) {
-
-    const { data: profile, error } = await supabaseClient
-        .from("profiles")
-        .select("id, first_name, last_name, role, is_active")
-        .eq("id", userId)
-        .single();
-
-    if (error || !profile) {
-        throw new Error(
-            "Your employee profile could not be verified. Contact your administrator."
-        );
+(() => {
+    'use strict';
+    // Support the original login markup as well as the updated template.
+    const form = document.getElementById('loginForm') || document.querySelector('form.login-form');
+    const button = form?.querySelector('.login-button') || form?.querySelector('button[type="submit"]');
+    const email = document.getElementById('email') || form?.querySelector('input[type="email"]');
+    const password = document.getElementById('password') || form?.querySelector('input[type="password"]');
+    let errorBox = document.getElementById('loginError');
+    if (!form || !button || !email || !password) {
+        // Prevent native form submission if the required controls are missing.
+        form?.addEventListener('submit', event => event.preventDefault());
+        if (button) button.disabled = true;
+        const notice = document.createElement('div');
+        notice.className = 'login-error';
+        notice.setAttribute('role', 'alert');
+        notice.textContent = 'The login page is incomplete. Reload the page or contact your administrator.';
+        (form || document.querySelector('.login-card') || document.body).prepend(notice);
+        console.error('[AUTH] Missing login controls:', { form: !form, button: !button, email: !email, password: !password });
+        return;
     }
-
-    if (!profile.is_active) {
-        throw new Error(
-            "Your account has been disabled. Contact your administrator."
-        );
+    if (!errorBox) {
+        errorBox = document.createElement('div');
+        errorBox.id = 'loginError';
+        errorBox.className = 'login-error';
+        errorBox.setAttribute('role', 'alert');
+        errorBox.hidden = true;
+        button.before(errorBox);
     }
-
-    return profile;
-}
-
-
-// ========================================
-// LOGIN FUNCTIONALITY
-// ========================================
-
-loginForm.addEventListener("submit", async (event) => {
-
-    event.preventDefault();
-
-    clearError();
-    setLoading(true);
-
-    const email = document
-        .getElementById("email")
-        .value.trim();
-
-    const password = document
-        .getElementById("password")
-        .value;
-
-    try {
-
-        // Validate input
-        if (!email || !password) {
-            showError("Please enter your email and password.");
+    const buttonText = button.querySelector('span');
+    // Keep an existing text-only button and its icon intact.
+    const textNode = buttonText ? null : Array.from(button.childNodes || []).find(node => node.nodeType === 3 && node.textContent.trim());
+    const originalLabel = buttonText?.textContent?.trim() || textNode?.textContent?.trim() || 'Log in';
+    const auth = window.PortalAuth;
+    let busy = false;
+    let navigating = false;
+    function showError(message) { errorBox.textContent = message; errorBox.hidden = !message; }
+    function loading(active, label = 'Logging in…') {
+        busy = active;
+        button.disabled = active;
+        if (buttonText) buttonText.textContent = active ? label : originalLabel;
+        else if (textNode) textNode.textContent = active ? label : originalLabel;
+        form.setAttribute('aria-busy', String(active));
+    }
+    function openPortal() {
+        navigating = true;
+        auth.redirect('./portal.html');
+    }
+    async function handleFailure(error) {
+        const code = error?.code;
+        if (code === 'denied' || code === 'expired') await auth.clearRejectedSession();
+        showError(auth.messages[code] || auth.messages.unavailable);
+    }
+    form.addEventListener('submit', async event => {
+        event.preventDefault();
+        if (busy || navigating) return;
+        showError('');
+        if (!auth || !window.supabaseClient) {
+            showError('Authentication is not configured. Contact your administrator.');
             return;
         }
-
-        // Authenticate with Supabase
-        const { data, error } =
-            await supabaseClient.auth.signInWithPassword({
-                email,
-                password
-            });
-
-        if (error || !data.user || !data.session) {
-            showError("Invalid email or password.");
-            return;
-        }
-
-        // Validate employee profile
+        if (!form.reportValidity()) return;
+        loading(true);
         try {
-
-            await validateProfile(data.user.id);
-
-        } catch (profileError) {
-
-            await supabaseClient.auth.signOut({
-                scope: "local"
+            const { data, error } = await auth.client().auth.signInWithPassword({
+                email: email.value.trim(), password: password.value
             });
-
-            showError(profileError.message);
-            return;
+            if (error || !data?.session) {
+                const status = Number(error?.status);
+                showError(status === 429 ? 'Too many attempts. Please try again later.' :
+                    !error || status >= 500 || !status ? auth.messages.unavailable : 'Unable to log in. Check your email and password.');
+                return;
+            }
+            await auth.verify();
+            password.value = '';
+            openPortal();
+        } catch (error) {
+            await handleFailure(error);
+        } finally {
+            if (!navigating) loading(false);
         }
-
-        // Redirect to Tools Portal
-        window.location.replace("./portal.html");
-
-    } catch (error) {
-
-        console.error("Authentication error:", error);
-
-        showError(
-            "An unexpected error occurred. Please try again."
-        );
-
-    } finally {
-
-        setLoading(false);
-
-    }
-
-});
-
-
-// ========================================
-// CHECK EXISTING SESSION
-// ========================================
-
-async function initializeLogin() {
-
-    loginButton.disabled = true;
-
-    try {
-
-        const { data, error } =
-            await supabaseClient.auth.getUser();
-
-        if (error || !data.user) {
-            return;
-        }
-
+    });
+    async function initialize() {
+        loading(true, 'Checking session…');
         try {
-
-            await validateProfile(data.user.id);
-
-            window.location.replace("./portal.html");
-
-        } catch (profileError) {
-
-            await supabaseClient.auth.signOut({
-                scope: "local"
-            });
-
-            showError(profileError.message);
-
+            if (!auth || !window.supabaseClient) {
+                showError('Authentication is not configured. Contact your administrator.');
+                return;
+            }
+            // A guard rejection or logout must NOT trigger another automatic redirect.
+            const reason = new URLSearchParams(window.location.search).get('reason');
+            if (reason && Object.hasOwn(auth.messages, reason)) {
+                if (reason !== 'signedout') showError(auth.messages[reason]);
+                return;
+            }
+            await auth.verify();
+            openPortal();
+        } catch (error) {
+            if (error?.code !== 'required') await handleFailure(error);
+        } finally {
+            if (!navigating) {
+                loading(false);
+                if (!auth || !window.supabaseClient) button.disabled = true;
+            }
         }
-
-    } catch (error) {
-
-        console.error("Session validation failed:", error);
-
-    } finally {
-
-        loginButton.disabled = false;
-
     }
-
-}
-
-
-// ========================================
-// INITIALIZE
-// ========================================
-
-// initializeLogin();
-
-loginButton.disabled = false;
+    initialize();
+})();
