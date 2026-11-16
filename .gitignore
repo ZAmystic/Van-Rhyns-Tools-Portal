@@ -1,0 +1,18 @@
+# Local configuration
+assets/JavaScript/config.js
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+
+# Deployment
+.vercel/
+dist/
+
+# Operating system
+.DS_Store
+Thumbs.db

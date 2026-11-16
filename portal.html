@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#811d19" />
+  <title>Tools Portal | Van Rhyns Attorneys</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="./assets/Images/Van%20Rhyns%20Attorneys%20Logo%20Mini.png" />
+  <link rel="stylesheet" href="./assets/CSS/portal.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <span class="header-label">Internal tools</span>
+
+      <!-- CSS wordmark; replace this with your actual logo image if available. -->
+      <img id="logo" src="https://vrattorneys.co.za/wp-content/uploads/2022/06/VR-logo-in-white.png" alt="Logo" class="logo">
+
+      <span class="header-spacer" aria-hidden="true"></span>
+    </header>
+
+    <main class="portal-panel" id="main-content">
+      <div class="portal-intro">
+        <h1>Tools Portal</h1>
+        <p>Access the tools you need to process information and manage your daily work efficiently.</p>
+      </div>
+
+      <div class="cards" aria-label="Available tools">
+        <a href="refrence-converter.html" class="card card--csv">
+          <span class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="8" y1="13" x2="16" y2="13" />
+              <line x1="8" y1="17" x2="16" y2="17" />
+              <line x1="8" y1="9" x2="10" y2="9" />
+            </svg>
+          </span>
+
+          <span class="card-content">
+            <span class="card-title">CSV to Excel</span>
+            <span class="card-description">Convert CSV files into formatted Excel spreadsheets quickly and accurately.</span>
+          </span>
+
+          <span class="card-action">
+            Open tool
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </span>
+        </a>
+        
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <p>Van Rhyns Attorneys &copy; <span id="current-year">2026</span>. All rights reserved.</p>
+    </footer>
+  </div>
+  <script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

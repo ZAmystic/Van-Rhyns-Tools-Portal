@@ -1,67 +1,169 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-ZA">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#811d19" />
-  <title>Tools Portal | Van Rhyns Attorneys</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./assets/CSS/index.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#801b18">
+    <title>Van Rhyns Attorneys Portal - Login</title>
+    <link rel="icon" type="image/png" href="./assets/Images/Van%20Rhyns%20Attorneys%20Logo%20Mini.png" />
+    <link rel="stylesheet" href="assets/CSS/index.css">
 </head>
 <body>
-  <div class="page-shell">
-    <header class="site-header">
-      <span class="header-label">Internal tools</span>
+    <main class="login-main">
+        <!-- Decorative Background -->
+        <svg class="background-icons" aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg">
 
-      <!-- CSS wordmark; replace this with your actual logo image if available. -->
-      <img id="logo" src="https://vrattorneys.co.za/wp-content/uploads/2022/06/VR-logo-in-white.png" alt="Logo" class="logo">
+            <defs>
+                <pattern id="legal-pattern"
+                        width="700"
+                        height="500"
+                        patternUnits="userSpaceOnUse">
 
-      <span class="header-spacer" aria-hidden="true"></span>
-    </header>
+                    <g fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round">
 
-    <main class="portal-panel" id="main-content">
-      <div class="portal-intro">
-        <h1>Tools Portal</h1>
-        <p>Access the tools you need to process information and manage your daily work efficiently.</p>
-      </div>
+                        <!-- Scales of Justice -->
+                        <g transform="translate(65 60) rotate(-15)">
+                            <path d="M0 -20V20
+                                    M-15 20H15
+                                    M-22 -12H22
+                                    M-17 -12L-27 9H-7Z
+                                    M17 -12L7 9H27Z"/>
+                        </g>
 
-      <div class="cards" aria-label="Available tools">
-        <a href="refrence-converter.html" class="card card--csv">
-          <span class="card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-              <polyline points="14 2 14 8 20 8" />
-              <line x1="8" y1="13" x2="16" y2="13" />
-              <line x1="8" y1="17" x2="16" y2="17" />
-              <line x1="8" y1="9" x2="10" y2="9" />
+                        <!-- Legal Document -->
+                        <g transform="translate(280 95) rotate(15)">
+                            <path d="M-17 -24H7L18 -13V24H-17Z
+                                    M7 -24V-13H18
+                                    M-9 -3H10
+                                    M-9 5H10
+                                    M-9 13H4"/>
+                        </g>
+
+                        <!-- Briefcase -->
+                        <g transform="translate(550 55) rotate(12)">
+                            <rect x="-25" y="-12"
+                                width="50" height="34" rx="4"/>
+                            <path d="M-10 -12V-21H10V-12
+                                    M-25 1H-4
+                                    M4 1H25"/>
+                            <rect x="-4" y="-2"
+                                width="8" height="7" rx="1"/>
+                        </g>
+
+                        <!-- Security Shield -->
+                        <g transform="translate(125 270) rotate(-12)">
+                            <path d="M0 -25L20 -17V0
+                                    Q20 16 0 26
+                                    Q-20 16 -20 0V-17Z
+                                    M-8 0L-2 7L10 -6"/>
+                        </g>
+
+                        <!-- Gavel -->
+                        <g transform="translate(435 235) rotate(35)">
+                            <rect x="-16" y="-22"
+                                width="32" height="20" rx="2"/>
+                            <path d="M-10 -22V-2
+                                    M10 -22V-2
+                                    M-3 -2V25H4V-2Z
+                                    M-20 32H20"/>
+                        </g>
+
+                        <!-- Padlock -->
+                        <g transform="translate(635 335) rotate(-15)">
+                            <rect x="-18" y="-5"
+                                width="36" height="28" rx="4"/>
+                            <path d="M-11 -5V-15
+                                    A11 11 0 0 1 11 -15V-5
+                                    M0 8V14"/>
+                            <circle cx="0" cy="5" r="3"/>
+                        </g>
+
+                        <!-- Additional Document -->
+                        <g transform="translate(255 430)
+                                    rotate(-15) scale(0.8)">
+                            <path d="M-17 -24H7L18 -13V24H-17Z
+                                    M7 -24V-13H18
+                                    M-9 -3H10
+                                    M-9 5H10
+                                    M-9 13H4"/>
+                        </g>
+
+                        <!-- Additional Scales -->
+                        <g transform="translate(490 440)
+                                    rotate(10) scale(0.9)">
+                            <path d="M0 -20V20
+                                    M-15 20H15
+                                    M-22 -12H22
+                                    M-17 -12L-27 9H-7Z
+                                    M17 -12L7 9H27Z"/>
+                        </g>
+
+                    </g>
+                </pattern>
+            </defs>
+
+            <rect width="100%"
+                height="100%"
+                fill="url(#legal-pattern)"/>
             </svg>
-          </span>
 
-          <span class="card-content">
-            <span class="card-title">CSV to Excel</span>
-            <span class="card-description">Convert CSV files into formatted Excel spreadsheets quickly and accurately.</span>
-          </span>
+        <section class="login-card" aria-labelledby="login-title">
+            <div class="login-brand">
+                <img src="assets/Images/Van%20Rhyns%20Attorneys%20Logo%20Mini.png" alt="" class="brand-mark">
+            </div>
+            <div class="login-intro">
+                <span class="eyebrow">Van Rhyns Attorneys</span>
+                <h1 id="login-title">Welcome back</h1>
+                <p>Sign in to access the internal tools portal.</p>
+            </div>
+            <div id="loginError"
+                class="login-error"
+                role="alert"
+                hidden>
+            </div>
 
-          <span class="card-action">
-            Open tool
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
-            </svg>
-          </span>
-        </a>
-        
-      </div>
+            <form class="login-form" action="loginForm" method="post">
+                <div class="field">
+                    <label for="email">Email address</label>
+                    <div class="input-wrap">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+                        <input type="email" id="email" name="email" placeholder="Enter your work email" autocomplete="username" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="password">Password</label>
+                    <div class="input-wrap">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" autocomplete="current-password" required>
+                    </div>
+                </div>
+                <button class="login-button" type="submit" disabled>
+                    <span>Log in</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+                </button>
+            </form>
+            <div class="staff-notice">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-3 7-10V5l-7-3-7 3v7c0 7 7 10 7 10Z"/><path d="m9 12 2 2 4-4"/></svg>
+                <div><strong>Authorised personnel only</strong><p>For access assistance, contact your administrator.</p></div>
+            </div>
+        </section>
     </main>
 
-    <footer class="site-footer">
-      <p>Van Rhyns Attorneys &copy; <span id="current-year">2026</span>. All rights reserved.</p>
-    </footer>
-  </div>
-  <script>
-    document.getElementById('current-year').textContent = new Date().getFullYear();
-  </script>
+    <!-- Supabase Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Environment Configuration -->
+    <script src="assets/JavaScript/config.js"></script>
+
+    <!-- Supabase Connection -->
+    <script src="assets/JavaScript/database.js"></script>
+
+    <!-- Login Controller -->
+    <script src="assets/JavaScript/login.js"></script>
 </body>
 </html>
