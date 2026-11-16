@@ -30,16 +30,15 @@ fs.mkdirSync(output, {
 
 // Copy website assets
 fs.cpSync(
-    path.join(root, "assets"),
-    path.join(output, "assets"),
+    path.join(root, 'tools'),
+    path.join(output, 'tools'),
     {
         recursive: true,
-        filter: source => source !== path.join(
-            root,
-            "assets",
-            "JavaScript",
-            "config.js"
-        )
+        filter: source => ![
+            'database',
+            'tests',
+            'README.md'
+        ].includes(path.basename(source))
     }
 );
 

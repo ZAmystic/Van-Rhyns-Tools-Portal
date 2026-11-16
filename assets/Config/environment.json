@@ -1,0 +1,21 @@
+{
+    "mode": "demo",
+    "environments": {
+        "demo": {
+            "filesTable": "demo_storage_files",
+            "binsTable": "demo_storage_bins",
+            "auditTable": "demo_storage_files_audit",
+            "showEnvironmentLabel": true,
+            "environmentLabel": "Demo data",
+            "binsAuditTable": "demo_storage_bins_audit"
+        },
+        "production": {
+            "filesTable": "storage_files",
+            "binsTable": "storage_bins",
+            "auditTable": "storage_files_audit",
+            "showEnvironmentLabel": false,
+            "environmentLabel": "Production data",
+            "binsAuditTable": "storage_bins_audit"
+        }
+    }
+}
